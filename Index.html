@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Mama 🤍</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #faf7f5;
+    color: #333;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 22px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  }
+
+  h1 {
+    text-align: center;
+    color: #c48b9f;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: #d8b0c2;
+    margin: 10px auto 20px;
+    border-radius: 10px;
+  }
+
+  /* Heart */
+  .heart-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .heart {
+    width: 34px;
+    height: 34px;
+    background: #d8a1b3;
+    transform: rotate(-45deg);
+    animation: beat 1.6s infinite;
+    position: relative;
+  }
+
+  .heart::before,
+  .heart::after {
+    content: "";
+    width: 34px;
+    height: 34px;
+    background: #d8a1b3;
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .heart::before { top: -17px; left: 0; }
+  .heart::after { left: 17px; top: 0; }
+
+  @keyframes beat {
+    0% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-45deg) scale(1.12); }
+    100% { transform: rotate(-45deg) scale(1); }
+  }
+
+  .message {
+    text-align: center;
+    line-height: 1.7;
+    font-size: 16px;
+    margin-bottom: 26px;
+  }
+
+  /* Layout */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  .left-col {
+    display: grid;
+    gap: 24px;
+  }
+
+  .right-col {
+    display: grid;
+    gap: 16px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    display: block;
+  }
+
+  /* RIGHT COLUMN – FINAL TUNING */
+.right-col {
+  grid-template-rows: auto auto;
+}
+
+.right-col img:first-child {
+  width: 100%;
+  max-height: 520px;     /* 👈 actually bigger now */
+  object-fit: cover;
+}
+
+.right-col img:last-child {
+  width: 100%;
+  max-height: 200px;     /* 👈 smaller, clear hierarchy */
+  object-fit: cover;
+}
+
+  /* Quote + Music */
+  .center-box {
+    background: #f7eef2;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .quote {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 16px;
+  }
+
+  /* Audio controls aesthetic */
+  audio {
+    width: 100%;
+    margin-top: 10px;
+    accent-color: #d8a1b3;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #999;
+  }
+
+  @media (max-width: 768px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+
+    .right-col img {
+      max-height: none;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Happy Birthday, Wajiha Khalil 🤍</h1>
+  <div class="divider"></div>
+
+  <div class="heart-wrapper">
+    <div class="heart"></div>
+  </div>
+
+  <div class="message">
+    I miss the nights when we played father and daughter zombie survival,
+    the imaginary bonfires made from pencils,
+    the laughter with Chippu,
+    and every adventure we went on together.
+    <br><br>
+    I will always be forever grateful, forever proud,
+    and forever yours.
+  </div>
+
+  <div class="layout">
+
+    <!-- LEFT -->
+    <div class="left-col">
+      <img src="img1.jpg.jpeg" alt="Memory 1">
+
+      <div class="center-box">
+        <div class="quote">
+          “A mother’s love doesn’t need space —
+          it becomes the space that holds everything together.”
+        </div>
+
+        <!-- Proper music controls -->
+        <audio controls>
+          <source src="music.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <img src="img4.jpg.jpeg" alt="Memory 4">
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right-col">
+      <img src="img2.jpg.jpeg" alt="Memory 2">
+      <img src="img3.jpg.jpeg" alt="Memory 3">
+    </div>
+
+  </div>
+
+  <footer>
+    Made with love 🤍
+  </footer>
+</div>
+
+</body>
+</html>
