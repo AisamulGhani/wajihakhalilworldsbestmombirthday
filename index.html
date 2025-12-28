@@ -6,38 +6,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+  :root {
+    --bg-color: #faf7f5;
+    --text-color: #333;
+    --container-bg: #fff;
+    --container-shadow: rgba(0,0,0,0.08);
+    --heading-color: #c48b9f;
+    --divider-color: #d8b0c2;
+    --heart-color: #d8a1b3;
+    --quote-bg: #f7eef2;
+    --audio-accent: #d8a1b3;
+  }
+
+  [data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #eee;
+    --container-bg: #222;
+    --container-shadow: rgba(0,0,0,0.5);
+    --heading-color: #f4a1c1;
+    --divider-color: #b56f91;
+    --heart-color: #f080a0;
+    --quote-bg: #333;
+    --audio-accent: #f080a0;
+  }
+
   body {
     margin: 0;
     font-family: "Segoe UI", sans-serif;
-    background: #faf7f5;
-    color: #333;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
   }
 
   .container {
     max-width: 900px;
     margin: 20px auto;
     padding: 22px;
-    background: #fff;
+    background: var(--container-bg);
     border-radius: 18px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 12px 30px var(--container-shadow);
+    transition: background 0.3s, box-shadow 0.3s;
   }
 
   h1 {
     text-align: center;
-    color: #c48b9f;
+    color: var(--heading-color);
     font-weight: 600;
     margin-bottom: 6px;
+    transition: color 0.3s;
   }
 
   .divider {
     width: 60px;
     height: 3px;
-    background: #d8b0c2;
+    background: var(--divider-color);
     margin: 10px auto 20px;
     border-radius: 10px;
+    transition: background 0.3s;
   }
 
-  /* Heart */
   .heart-wrapper {
     display: flex;
     justify-content: center;
@@ -47,10 +74,11 @@
   .heart {
     width: 34px;
     height: 34px;
-    background: #d8a1b3;
+    background: var(--heart-color);
     transform: rotate(-45deg);
     animation: beat 1.6s infinite;
     position: relative;
+    transition: background 0.3s;
   }
 
   .heart::before,
@@ -58,9 +86,10 @@
     content: "";
     width: 34px;
     height: 34px;
-    background: #d8a1b3;
+    background: var(--heart-color);
     border-radius: 50%;
     position: absolute;
+    transition: background 0.3s;
   }
 
   .heart::before { top: -17px; left: 0; }
@@ -79,7 +108,6 @@
     margin-bottom: 26px;
   }
 
-  /* Layout */
   .layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -104,29 +132,28 @@
     display: block;
   }
 
-  /* RIGHT COLUMN – FINAL TUNING */
-.right-col {
-  grid-template-rows: auto auto;
-}
+  .right-col {
+    grid-template-rows: auto auto;
+  }
 
-.right-col img:first-child {
-  width: 100%;
-  max-height: 520px;     /* 👈 actually bigger now */
-  object-fit: cover;
-}
+  .right-col img:first-child {
+    width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+  }
 
-.right-col img:last-child {
-  width: 100%;
-  max-height: 200px;     /* 👈 smaller, clear hierarchy */
-  object-fit: cover;
-}
+  .right-col img:last-child {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+  }
 
-  /* Quote + Music */
   .center-box {
-    background: #f7eef2;
+    background: var(--quote-bg);
     border-radius: 16px;
     padding: 20px;
     text-align: center;
+    transition: background 0.3s;
   }
 
   .quote {
@@ -135,11 +162,11 @@
     margin-bottom: 16px;
   }
 
-  /* Audio controls aesthetic */
   audio {
     width: 100%;
     margin-top: 10px;
-    accent-color: #d8a1b3;
+    accent-color: var(--audio-accent);
+    transition: accent-color 0.3s;
   }
 
   footer {
@@ -147,6 +174,7 @@
     margin-top: 20px;
     font-size: 13px;
     color: #999;
+    transition: color 0.3s;
   }
 
   @media (max-width: 768px) {
@@ -158,13 +186,34 @@
       max-height: none;
     }
   }
+
+  /* Toggle Button */
+  .toggle-btn {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 8px 16px;
+    background: var(--divider-color);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+  }
+
+  .toggle-btn:hover {
+    opacity: 0.9;
+  }
+
 </style>
 </head>
 
-<body>
+<body data-theme="light">
 
 <div class="container">
-  <h1>Happy Birthday, Wajiha Khalil 🤍</h1>
+  <button class="toggle-btn" onclick="toggleTheme()">Switch Light/Dark Mode</button>
+
+  <h1>Happy Birthday, Mama 🤍</h1>
   <div class="divider"></div>
 
   <div class="heart-wrapper">
@@ -193,7 +242,6 @@
           it becomes the space that holds everything together.”
         </div>
 
-        <!-- Proper music controls -->
         <audio controls>
           <source src="music.mp3" type="audio/mpeg">
         </audio>
@@ -215,5 +263,14 @@
   </footer>
 </div>
 
+<script>
+  function toggleTheme() {
+    const body = document.body;
+    const current = body.getAttribute('data-theme');
+    body.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+  }
+</script>
+
 </body>
 </html>
+
