@@ -1,276 +1,305 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Happy Birthday Mama 🤍</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <title>Happy Birthday Mama 🤍</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<style>
-  :root {
-    --bg-color: #faf7f5;
-    --text-color: #333;
-    --container-bg: #fff;
-    --container-shadow: rgba(0,0,0,0.08);
-    --heading-color: #c48b9f;
-    --divider-color: #d8b0c2;
-    --heart-color: #d8a1b3;
-    --quote-bg: #f7eef2;
-    --audio-accent: #d8a1b3;
-  }
+  <style>
+    :root{
+      --bg: #faf7f5;
+      --text: #333;
+      --card: #fff;
+      --muted: #666;
+      --accent: #c48b9f;
+      --divider: #d8b0c2;
+      --heart: #d8a1b3;
+      --quote-bg: #f7eef2;
+      --shadow: rgba(0,0,0,0.08);
+      --radius: 14px;
 
-  [data-theme="dark"] {
-    --bg-color: #1a1a1a;
-    --text-color: #eee;
-    --container-bg: #222;
-    --container-shadow: rgba(0,0,0,0.5);
-    --heading-color: #f4a1c1;
-    --divider-color: #b56f91;
-    --heart-color: #f080a0;
-    --quote-bg: #333;
-    --audio-accent: #f080a0;
-  }
-
-  body {
-    margin: 0;
-    font-family: "Segoe UI", sans-serif;
-    background: var(--bg-color);
-    color: var(--text-color);
-    transition: background 0.3s, color 0.3s;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 22px;
-    background: var(--container-bg);
-    border-radius: 18px;
-    box-shadow: 0 12px 30px var(--container-shadow);
-    transition: background 0.3s, box-shadow 0.3s;
-  }
-
-  h1 {
-    text-align: center;
-    color: var(--heading-color);
-    font-weight: 600;
-    margin-bottom: 6px;
-    transition: color 0.3s;
-  }
-
-  .divider {
-    width: 60px;
-    height: 3px;
-    background: var(--divider-color);
-    margin: 10px auto 20px;
-    border-radius: 10px;
-    transition: background 0.3s;
-  }
-
-  .heart-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .heart {
-    width: 34px;
-    height: 34px;
-    background: var(--heart-color);
-    transform: rotate(-45deg);
-    animation: beat 1.6s infinite;
-    position: relative;
-    transition: background 0.3s;
-  }
-
-  .heart::before,
-  .heart::after {
-    content: "";
-    width: 34px;
-    height: 34px;
-    background: var(--heart-color);
-    border-radius: 50%;
-    position: absolute;
-    transition: background 0.3s;
-  }
-
-  .heart::before { top: -17px; left: 0; }
-  .heart::after { left: 17px; top: 0; }
-
-  @keyframes beat {
-    0% { transform: rotate(-45deg) scale(1); }
-    50% { transform: rotate(-45deg) scale(1.12); }
-    100% { transform: rotate(-45deg) scale(1); }
-  }
-
-  .message {
-    text-align: center;
-    line-height: 1.7;
-    font-size: 16px;
-    margin-bottom: 26px;
-  }
-
-  .layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    align-items: start;
-  }
-
-  .left-col {
-    display: grid;
-    gap: 24px;
-  }
-
-  .right-col {
-    display: grid;
-    gap: 16px;
-  }
-
-  img {
-    width: 100%;
-    height: auto;
-    border-radius: 14px;
-    display: block;
-  }
-
-  .right-col {
-    grid-template-rows: auto auto;
-  }
-
-  .right-col img:first-child {
-    width: 100%;
-    max-height: 520px;
-    object-fit: cover;
-  }
-
-  .right-col img:last-child {
-    width: 100%;
-    max-height: 200px;
-    object-fit: cover;
-  }
-
-  .center-box {
-    background: var(--quote-bg);
-    border-radius: 16px;
-    padding: 20px;
-    text-align: center;
-    transition: background 0.3s;
-  }
-
-  .quote {
-    font-style: italic;
-    color: #666;
-    margin-bottom: 16px;
-  }
-
-  audio {
-    width: 100%;
-    margin-top: 10px;
-    accent-color: var(--audio-accent);
-    transition: accent-color 0.3s;
-  }
-
-  footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 13px;
-    color: #999;
-    transition: color 0.3s;
-  }
-
-  @media (max-width: 768px) {
-    .layout {
-      grid-template-columns: 1fr;
+      /* responsive sizing helpers */
+      --gap-lg: 18px;
+      --gap-sm: 12px;
     }
 
-    .right-col img {
-      max-height: none;
+    [data-theme="dark"]{
+      --bg: #111;
+      --text: #eee;
+      --card: #1b1b1b;
+      --muted: #bbb;
+      --accent: #f4a1c1;
+      --divider: #b56f91;
+      --heart: #f080a0;
+      --quote-bg: #222;
+      --shadow: rgba(0,0,0,0.45);
     }
-  }
 
-  /* Toggle Button */
-  .toggle-btn {
-    display: block;
-    margin: 0 auto 20px;
-    padding: 8px 16px;
-    background: var(--divider-color);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.3s;
-  }
+    /* Page base */
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
 
-  .toggle-btn:hover {
-    opacity: 0.9;
-  }
+    /* Container */
+    .container{
+      max-width: 980px;
+      margin: 20px auto;
+      padding: clamp(14px,3.5vw,26px);
+      background:var(--card);
+      border-radius: 18px;
+      box-shadow: 0 12px 30px var(--shadow);
+      transition: background .25s, box-shadow .25s;
+    }
 
-</style>
+    /* Heading & divider */
+    h1{
+      margin:0;
+      margin-bottom:8px;
+      text-align:center;
+      color:var(--accent);
+      font-weight:600;
+      font-size:clamp(20px,3.6vw,30px);
+    }
+
+    .divider{
+      width:64px;
+      height:4px;
+      background:var(--divider);
+      margin: 10px auto 18px;
+      border-radius:12px;
+    }
+
+    /* heart little animation */
+    .heart-wrapper{ display:flex; justify-content:center; margin-bottom:18px; }
+    .heart{
+      width: clamp(20px,4.2vw,34px);
+      height: clamp(20px,4.2vw,34px);
+      background:var(--heart);
+      transform: rotate(-45deg);
+      position:relative;
+      animation:beat 1.5s infinite;
+      transition:background .2s, transform .2s;
+    }
+    .heart::before, .heart::after{
+      content:"";
+      position:absolute;
+      width: inherit;
+      height: inherit;
+      background:var(--heart);
+      border-radius:50%;
+      transition: background .2s;
+    }
+    .heart::before{ top:-50%; left:0; transform:translateY(0); }
+    .heart::after { left:50%; top:0; transform:translateX(0); }
+
+    @keyframes beat{
+      0% { transform: rotate(-45deg) scale(1); }
+      50% { transform: rotate(-45deg) scale(1.12); }
+      100% { transform: rotate(-45deg) scale(1); }
+    }
+
+    /* Intro message */
+    .message{
+      text-align:center;
+      font-size:clamp(14px,2.1vw,16px);
+      color:var(--muted);
+      margin-bottom:20px;
+      line-height:1.6;
+    }
+
+    /* Layout grid: 2 columns desktop, 1 column tablet/phone */
+    .layout{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-lg);
+      align-items:start;
+    }
+
+    /* column spacing preserved by card wrappers */
+    .left-col, .right-col{
+      display:grid;
+      gap: var(--gap-sm);
+    }
+
+    /* Generic image card so layout looks consistent on any size */
+    .img-card{
+      background: transparent;
+      border-radius: var(--radius);
+      overflow:hidden;
+      display:block;
+      width:100%;
+      aspect-ratio: 16 / 10; /* keeps image height predictable */
+      box-shadow: 0 6px 18px var(--shadow);
+    }
+    .img-card img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+
+    /* Center box for quote + audio */
+    .center-box{
+      background:var(--quote-bg);
+      border-radius:14px;
+      padding: clamp(12px,2.6vw,20px);
+      text-align:center;
+      box-shadow: 0 6px 18px var(--shadow);
+    }
+    .quote{
+      font-style:italic;
+      color:var(--muted);
+      margin-bottom:12px;
+      font-size:clamp(14px,2.1vw,16px);
+    }
+
+    /* audio: make it full width and reduce height on small screens */
+    audio{
+      width:100%;
+      height:44px;
+      accent-color:var(--heart);
+    }
+    /* smaller audio control area on very small devices */
+    @media (max-width:420px){
+      audio{ height:36px; }
+    }
+
+    footer{
+      text-align:center;
+      margin-top:18px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Toggle button */
+    .toggle-btn{
+      display:block;
+      margin:0 auto 16px;
+      padding:8px 16px;
+      background:var(--divider);
+      color:#fff;
+      border:0;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:14px;
+    }
+
+    /* RESPONSIVE ADJUSTMENTS */
+
+    /* Single column layout for narrow screens */
+    @media (max-width: 820px){
+      .layout{ grid-template-columns: 1fr; }
+      /* keep the same visual order: left-col items first, then right-col */
+      .left-col, .right-col{ gap:14px; }
+    }
+
+    /* On very narrow vertical phones make typography and paddings slightly smaller */
+    @media (max-width:420px){
+      .container{ padding:12px; border-radius:14px; }
+      h1{ font-size:20px; }
+      .divider{ width:48px; height:3px; }
+      .message{ font-size:13px; margin-bottom:14px; }
+      .img-card{ aspect-ratio: 16 / 9; }
+      .center-box{ padding:12px; }
+      .heart{ width:24px; height:24px; }
+    }
+
+    /* A subtle card look for each visual block so the format feels unchanged even when stacked */
+    .card-block{
+      background: transparent;
+      padding:0;
+      border-radius:var(--radius);
+      overflow:visible;
+    }
+
+    /* Small utility: keep images rounded on wide screens too */
+    .rounded{
+      border-radius:var(--radius);
+      overflow:hidden;
+    }
+  </style>
 </head>
-
 <body data-theme="light">
+  <div class="container">
+    <button class="toggle-btn" onclick="toggleTheme()">Switch Light/Dark Mode</button>
 
-<div class="container">
-  <button class="toggle-btn" onclick="toggleTheme()">Switch Light/Dark Mode</button>
+    <h1>Happy Birthday, Mama 🤍</h1>
+    <div class="divider"></div>
 
-  <h1>Happy Birthday, Mama 🤍</h1>
-  <div class="divider"></div>
+    <div class="heart-wrapper" aria-hidden="true">
+      <div class="heart"></div>
+    </div>
 
-  <div class="heart-wrapper">
-    <div class="heart"></div>
-  </div>
+    <div class="message">
+      I miss the nights when we played father-and-daughter zombie survival,
+      the imaginary bonfires made from pencils, the laughter with Chippu,
+      and every adventure we went on together.
+      <br><br>
+      I will always be forever grateful, forever proud, and forever yours.
+    </div>
 
-  <div class="message">
-    I miss the nights when we played father and daughter zombie survival,
-    the imaginary bonfires made from pencils,
-    the laughter with Chippu,
-    and every adventure we went on together.
-    <br><br>
-    I will always be forever grateful, forever proud,
-    and forever yours.
-  </div>
+    <div class="layout">
+      <!-- LEFT COLUMN -->
+      <div class="left-col">
+        <figure class="card-block img-card rounded" aria-hidden="true">
+          <img src="img1.jpg.jpeg" alt="Memory 1" loading="lazy">
+        </figure>
 
-  <div class="layout">
+        <div class="center-box card-block">
+          <div class="quote">
+            “A mother’s love doesn’t need space — it becomes the space that holds everything together.”
+          </div>
 
-    <!-- LEFT -->
-    <div class="left-col">
-      <img src="img1.jpg.jpeg" alt="Memory 1">
-
-      <div class="center-box">
-        <div class="quote">
-          “A mother’s love doesn’t need space —
-          it becomes the space that holds everything together.”
+          <audio controls>
+            <source src="music.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
         </div>
 
-        <audio controls>
-          <source src="music.mp3" type="audio/mpeg">
-        </audio>
+        <figure class="card-block img-card rounded" aria-hidden="true">
+          <img src="img4.jpg.jpeg" alt="Memory 4" loading="lazy">
+        </figure>
       </div>
 
-      <img src="img4.jpg.jpeg" alt="Memory 4">
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+        <figure class="card-block img-card rounded" aria-hidden="true">
+          <img src="img2.jpg.jpeg" alt="Memory 2" loading="lazy">
+        </figure>
+
+        <figure class="card-block img-card rounded" aria-hidden="true">
+          <img src="img3.jpg.jpeg" alt="Memory 3" loading="lazy">
+        </figure>
+      </div>
     </div>
 
-    <!-- RIGHT -->
-    <div class="right-col">
-      <img src="img2.jpg.jpeg" alt="Memory 2">
-      <img src="img3.jpg.jpeg" alt="Memory 3">
-    </div>
-
+    <footer>
+      Made with love 🤍
+    </footer>
   </div>
 
-  <footer>
-    Made with love 🤍
-  </footer>
-</div>
+  <script>
+    function toggleTheme(){
+      const b = document.body;
+      b.setAttribute('data-theme', b.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+    }
 
-<script>
-  function toggleTheme() {
-    const body = document.body;
-    const current = body.getAttribute('data-theme');
-    body.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
-  }
-</script>
-
+    // Optional: better initial theme based on OS preference
+    (function applyPref(){
+      try {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if(prefersDark) document.body.setAttribute('data-theme','dark');
+      }catch(e){}
+    })();
+  </script>
 </body>
 </html>
 
